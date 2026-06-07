@@ -1,41 +1,17 @@
-# Step 0: The TCP Echo Server 🦀
+# Redis Clone in Rust 🦀
 
-This branch contains the foundational step of building a Redis clone in Rust: a basic, single-threaded TCP Echo Server. 
+A learning project focused on building a Redis-like in-memory data structure store from scratch in Rust. This repository serves as a step-by-step implementation journey to understand how Redis works under the hood.
 
-Before we can build an in-memory database, we need a server that can bind to a port, accept incoming network connections, and physically read and write bytes over a socket. This step accomplishes exactly that using Rust's standard library.
+The project is structured across multiple branches, where each branch represents a progressive step in building out the Redis features. You can check out specific branches to see the code and detailed README for that particular step.
 
-## 🎯 Objective
-Create a server that listens on port `6379` (the default Redis port) and continuously echoes back any bytes it receives from a client until the client disconnects.
+## 🚀 Learning Roadmap
 
-## 🧠 Technical Concepts Covered
-* **Socket Programming:** Using `std::net::TcpListener` and `TcpStream` to handle TCP connections.
-* **Blocking I/O:** The server operates on a single thread and uses blocking loops. It completely processes one client before it can accept the next.
-* **Byte Buffers:** Managing raw byte arrays (`[u8; 512]`) to read data from the network stream and write it back.
-* **Test-Driven Development (TDD):** Utilizing `std::thread` and `std::sync::Once` to spin up a background test server, allowing automated integration tests to act as mock network clients.
+*(Roadmap steps will be populated here as the project progresses)*
 
-## 🚀 How to Run
+## 🌿 Branch Structure
 
-### 1. Start the Server
-Run the project using Cargo. This will start the server on `127.0.0.1:6379`.
-```bash
-cargo run
-```
+Each major milestone is contained in its own branch. Switch to a specific branch to view its implementation details, tests, and a dedicated README for that step:
 
-### 2. Connect a Client
-Open a second terminal window and use netcat (or telnet) to connect to the server:
-```bash
-nc 127.0.0.1 6379
-```
-Type any message and press Enter. The server will immediately echo your exact message back to you. Press Ctrl+C to disconnect.
+- **[STEP-0-TCP-ECHO-Server](https://github.com/Mr-Bais/redis-rust/tree/STEP-0-TCP-ECHO-Server)**: The foundational step focusing on building a basic single-threaded TCP Echo Server.
 
-## 🧪 Testing
-This step implements full integration tests to verify both the connection acceptance and the echo logic.
-
-Run the test suite:
-```bash
-cargo test
-```
-
-## ⚠️ Limitations (Why isn't this Redis yet?)
-* **Single-Client Bottleneck:** Because it relies on standard blocking I/O without multiplexing (like epoll), a second client trying to connect will hang until the first client disconnects.
-* **Protocol Ignorance:** If you connect a real `redis-cli` to this server, it will echo the raw Redis Serialization Protocol (RESP) bytes straight back instead of parsing them into actionable database commands.
+*(More branches will be added here as the project progresses. Detailed step-by-step instructions and technical concepts are available in the respective branch READMEs.)*
